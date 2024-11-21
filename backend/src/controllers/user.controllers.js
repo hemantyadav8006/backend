@@ -29,7 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "All fields are required");
   }
 
-  const existedUser = User.findOne({ $or: [{ email }, { username }] });
+  const existedUser = await User.findOne({ $or: [{ email }, { username }] });
   if (existedUser) throw new ApiError(409, "Email or username already exist");
 
   const avatarLocalPath = req.files?.avatar[0]?.path;
@@ -63,7 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   return res
-    .Status(201)
+    .status(201)
     .json(new ApiResponse(200, createdUser, "User Registered Successfully"));
 });
 
