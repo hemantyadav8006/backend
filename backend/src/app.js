@@ -24,4 +24,10 @@ app.use(express.static("public/temp")); // to store image files, favicons
 
 app.use(cookieParser()); // read/remove the server cookies
 
+// routes
+import userRouter from "./routes/user.routes.js";
+
+// routes decleartion
+app.use("/api/v1/users", userRouter);
+
 export { app };
