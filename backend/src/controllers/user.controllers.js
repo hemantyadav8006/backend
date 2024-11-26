@@ -3,7 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.models.js";
 import { uploadCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { JsonWebTokenError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 const options = {
   httpOnly: true,
@@ -167,9 +167,16 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
+  // get refreshToken from cookies or body
+  // verify the incomingRefreshToken with the jwt verify method
+  // get the user data from the decodedToken id
+  // again check the incomingRefreshToken and the stored refreshToken in the database
+  // now generate accessToken and refreshToken
+  // return the res with new cookie of accessToken and refreshToken
+
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
-  if (!incomingRefreshToken) throw new ApiError(401, "Unauthorized Request!");
+  if (!incomingRefreshToken) throw new ApiError(401, "Token Not Found!");
 
   try {
     const decodeedToken = jwt.verify(
