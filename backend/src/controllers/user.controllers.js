@@ -264,7 +264,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
   if (!avatar.url)
     throw new ApiError(400, "Error while uploading on cloudinary!");
 
-  await User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     { $set: { avatar: avatar.url } },
     { new: true }
@@ -272,13 +272,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        { avatar: avatar.url },
-        "Avatar is updated Successfully!"
-      )
-    );
+    .json(new ApiResponse(200, user, "Avatar is updated Successfully!"));
 });
 
 const updatecoverImage = asyncHandler(async (req, res) => {
@@ -290,7 +284,7 @@ const updatecoverImage = asyncHandler(async (req, res) => {
   if (!coverImage.url)
     throw new ApiError(400, "Error while uploading on cloudinary!");
 
-  await User.findByIdAndUpdate(
+  const user = await User.findByIdAndUpdate(
     req.user?._id,
     { $set: { coverImage: coverImage.url } },
     { new: true }
@@ -298,13 +292,7 @@ const updatecoverImage = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        { coverImage: coverImage.url },
-        "Cover Image is updated Successfully!"
-      )
-    );
+    .json(new ApiResponse(200, user, "Cover Image is updated Successfully!"));
 });
 
 export {
