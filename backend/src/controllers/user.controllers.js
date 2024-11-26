@@ -281,6 +281,32 @@ const updateAvatar = asyncHandler(async (req, res) => {
     );
 });
 
+const updatecoverImage = asyncHandler(async (req, res) => {
+  const coverImageLocalPath = req.file?.path;
+  if (!coverImageLocalPath)
+    throw new ApiError(400, "CoverImage file required!");
+
+  const coverImage = await uploadCloudinary(coverImageLocalPath);
+  if (!coverImage.url)
+    throw new ApiError(400, "Error while uploading on cloudinary!");
+
+  await User.findByIdAndUpdate(
+    req.user?._id,
+    { $set: { coverImage: coverImage.url } },
+    { new: true }
+  ).select("-password");
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        { coverImage: coverImage.url },
+        "Cover Image is updated Successfully!"
+      )
+    );
+});
+
 export {
   registerUser,
   loginUser,
@@ -290,4 +316,5 @@ export {
   getCurrentUser,
   updateAccountDetails,
   updateAvatar,
+  updatecoverImage,
 };
