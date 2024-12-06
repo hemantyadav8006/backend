@@ -1,6 +1,6 @@
-# Backend: Twitter-YouTube Backend API
+# Backend: Twitter-YouTube Project
 
-Welcome to **Learning-Backend**, a **production-ready backend API** designed for a hybrid **Twitter-YouTube** platform. This backend allows users to upload videos, associate them with authors, and interact with data through optimized custom APIs. Built with **Node.js** and **Express.js**, the system leverages **MongoDB Atlas** for data storage and **Mongoose** for data modeling.
+Welcome to the **Backend Project**, a **production-ready backend** designed for a hybrid **Twitter-YouTube** platform. This backend allows users to upload videos, like the videos, and tweets, can add playlists, Watch History is maintained, can subscribe to other channels, and interact with data through optimized custom APIs. Built with **Node.js** and **Express.js**, the system leverages **MongoDB Atlas** for data storage and **Mongoose** for data modeling.
 
 This project is fully optimized, rigorously tested with **Postman**, and ready for production. Note that the front-end for this project is yet to be developed.
 
@@ -54,6 +54,17 @@ Create a **.env** file in the root directory and add the following:
 ```plaintext
 MONGO_URI=<Your_MongoDB_Atlas_Connection_String>
 PORT=5000
+CORS_ORIGIN=*
+
+ACCESS_TOKEN_SECRET=<your_ACCESS_TOKEN_SECRET>
+ACCESS_TOKEN_EXPIRY=<your_ACCESS_TOKEN_EXPIRY> || 1d
+
+ACCESS_TOKEN_SECRET=<your_ACCESS_TOKEN_SECRET>
+REFRESH_TOKEN_EXPIRY=5d
+
+CLOUDINARY_CLOUD_NAME=<your_CLOUDINARY_CLOUD_NAME>
+CLOUDINARY_API_KEY=<your_CLOUDINARY_API_KEY>
+CLOUDINARY_API_SECRET=<your_CLOUDINARY_API_SECRET>
 ```
 
 ### 4. Start the Server
